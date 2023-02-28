@@ -29,7 +29,7 @@ const Profile = (props) => {
   const[cameraReady,setCameraReady]= useState(false);
   const cameraRef = useRef(null);
 
-  useEffect(()=>{
+  useEffect(()=>{//runs before the screen is showed
     const getUserInfo= async()=>{
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
       //setCameraPermission(cameraPermission);
@@ -100,6 +100,7 @@ elevation: 4}}>
 {/* <BarChart barColor='green' data={data} horizontalData={horizontalData} /> */}
      <View style={{ marginTop: 50 }}>
       <Button onPress={myCustomerShare} title="Share" />
+      <Button onPress={()=>{AsyncStorage.removeItem("sessionToken")}} title="Logout" />
     </View>
     </CardContent>
     </Card>
