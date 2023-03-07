@@ -64,14 +64,17 @@ const CounterStackScreen = () =>{
     );
 }
 
-const ProfileStackScreen = () =>{
-    return(
+const ProfileStackScreen = (props) =>{
+    return( 
      <Stack.Navigator
      screenOptions= {{
         headerStyle:{backgroundColor:'#A0CE4E'},
         headerTintColor:'white'}}>
 
-        <Stack.Screen name="Profile" component={Profile} options={{
+        <Stack.Screen name="Profile" 
+        // component={Profile} 
+        children={() =><Profile setLoggedInState={props.setLoggedInState}/>}
+        options={{
              headerTitleAlign: "center",
              headerTitleStyle:{
                fontWeight:'bold', 
