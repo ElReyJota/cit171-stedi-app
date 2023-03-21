@@ -59,6 +59,20 @@ export default function Counter(props) {
   }, 1000);
 }, [counter, currentScreen]);
 
+const mySpotterShare = async() =>{
+  const sessionToken = await AsyncStorage.getItem('sessionToken');
+  const shareOptions = {
+    message: 'https://dev.stedi.me/timer.html#'+sessionToken
+  }
+  try{
+    const shareResponse = await Share.share(shareOptions)
+    console.log(shareResponse);
+    }
+    catch(error){
+console.log('Error', error)
+    }
+  }
+
  const clockify = () =>{
   let hours = Math.floor(counter / 60 / 60);
   let mins=  Math.floor(counter / 60 % 60);
@@ -328,9 +342,18 @@ elevation: 4}}>
       <Text>{subscription ? 'Stop' : 'GO'}</Text>
      </TouchableOpacity>
 
+  <TouchableOpacity
+     onPress={ mySpotterShare}
+      style={styles.button3}
+    >
+      <Text>Invite Spotter</Text>
+     </TouchableOpacity>
+
      </CardContent>
      <ProgressBar progress={(stepCount * 0.50/30) + (completionCount * 0.50)} width={300} height={25} color={'#A0CE4E'} style={styles.bar}/>
+     
 </Card>
+  
       </View>
   );
 
@@ -475,5 +498,18 @@ marginBottom: 2
       backgroundColor: '#A0CE4E',
       marginLeft:50
     },
+    button3: {
+      marginTop: -16,
+      marginBottom: 20,
+      width: 170,
+      height: 38,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 10,
+      borderRadius: 100,
+      backgroundColor: '#A0CE4E',
+      marginLeft:50
+
+    }
 
 });
